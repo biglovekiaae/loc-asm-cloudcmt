@@ -57,7 +57,7 @@ app.post('/doInsert', async(req, res) => {
     let newProduct = { Name: inputName, ID: inputID, Number: inputNumber, Price: inputPrice };
     if (inputName.trim().length == 0) {
         let modelError = { nameError: "No name!", mspError: "NO ID!" };
-        res.render('insert', { model: modelError });
+        res.render('Insert.hbs', { model: modelError });
     } else {
         let client = await MongoClient.connect(url);
         let dbo = client.db("LocPoShop");
