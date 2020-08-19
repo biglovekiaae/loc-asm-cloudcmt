@@ -47,7 +47,7 @@ app.get('/delete', async(req, res) => {
     res.redirect('/allProduct');
 })
 app.get('/insert', (req, res) => {
-    res.render('insert');
+    res.render('Insert.hbs');
 })
 app.post('/doInsert', async(req, res) => {
     let inputName = req.body.txtName;
