@@ -2,6 +2,8 @@ const express = require('express');
 const engines = require('consolidate');
 const app = express();
 
+const port = process.env.PORT || "8000";
+
 var bodyParser = require("body-parser");
 const { parse } = require('path');
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,7 +32,7 @@ app.get('/allProduct', async(req, res) => {
     let results = await dbo.collection("products").find({}).toArray();
     res.render('allProduct', { model: results });
 })
-server = app.listen(9000, (err) => {
+server = app.listen(port, (err) => {
     if (err) { console.log(err) } else {
         console.log('done');
     }
