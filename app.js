@@ -52,9 +52,10 @@ app.get('/insert', (req, res) => {
 app.post('/doInsert', async(req, res) => {
     let inputName = req.body.txtName;
     let inputID = req.body.txtID;
+    let inputImage = req.body.txtImage;
     let inputNumber = req.body.txtNumber;
     let inputPrice = req.body.txtPrice;
-    let newProduct = { Name: inputName, ID: inputID, Number: inputNumber, Price: inputPrice };
+    let newProduct = { Name: inputName, ID: inputID, Image: inputImage, Number: inputNumber, Price: inputPrice };
     if (inputName.trim().length == 0) {
         let modelError = { nameError: "No name!", mspError: "NO ID!" };
         res.render('Insert.hbs', { model: modelError });
