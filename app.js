@@ -15,7 +15,8 @@ app.set('views', './views');
 app.set('view engine', 'hbs');
 
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://huong_dep_zai:Nnxd9MPkmJiFLouY@cluster0.qxyey.mongodb.net/LocPoShop";
+var url = "mongodb+srv://loc:123@cluster0.zvhhy.mongodb.net/test";
+
 
 app.get('/', async(req, res) => {
     let client = await MongoClient.connect(url, { useUnifiedTopology: true });
@@ -29,9 +30,9 @@ app.get('/allProduct', async(req, res) => {
     let results = await dbo.collection("products").find({}).toArray();
     res.render('allProduct', { model: results });
 })
-server = app.listen(5000, (err) => {
+server = app.listen(9000, (err) => {
     if (err) { console.log(err) } else {
-        console.log('thanh cong');
+        console.log('done');
     }
 });
 app.get('/delete', async(req, res) => {
@@ -48,12 +49,12 @@ app.get('/insert', (req, res) => {
 })
 app.post('/doInsert', async(req, res) => {
     let inputName = req.body.txtName;
-    let inputMSP = req.body.txtMSP;
-    let inputSL = req.body.txtSL;
-    let inputGia = req.body.txtGia;
-    let newProduct = { name: inputName, MSP: inputMSP, Sl: inputSL, Gia: inputGia };
+    let inputID = req.body.txtID;
+    let inputNumber = req.body.txtNumber;
+    let inputPrice = req.body.txtPrice;
+    let newProduct = { Name: inputName, ID: inputID, Number: inputNumber, Price: inputPrice };
     if (inputName.trim().length == 0) {
-        let modelError = { nameError: "chua co ten!", mspError: "chua co ma san pham!" };
+        let modelError = { nameError: "No name!", mspError: "NO ID!" };
         res.render('insert', { model: modelError });
     } else {
         let client = await MongoClient.connect(url);
@@ -69,7 +70,7 @@ app.post('/doSearch', async(req, res) => {
     let client = await MongoClient.connect(url);
     let dbo = client.db("LocPoShop");
     // let results = await dbo.collection("Student").find({name:inputName}).toArray();
-    let results = await dbo.collection("products").find({ name: new RegExp(inputName, 'i') }).toArray();
+    let results = await dbo.collection("products").find({ Name: new RegExp(inputName, 'i') }).toArray();
     res.render('allProduct', { model: results });
 
 })
@@ -92,10 +93,10 @@ app.post('/doupdate', async(req, res) => {
     let dbo = client.db("LocPoShop");
     change = {
         $set: {
-            name: req.body.txtName,
-            MSP: req.body.txtMSP,
-            Sl: req.body.txtSL,
-            Gia: req.body.txtGia
+            Name: req.body.txtName,
+            ID: req.body.txtID,
+            Number: req.body.txtNumber,
+            Price: req.body.txtPrice
         }
     }
     await dbo.collection("products").updateOne(condition, change);

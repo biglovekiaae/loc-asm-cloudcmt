@@ -7,25 +7,35 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Update information</title>
+     <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
 </head>
-<body>
+<body class="d-flex align-items-center flex-column">
     <table class="table bordered">
         <thead>
              <tr>
               <th>Name</th>
-              <th>MSP</th>  
-              <th>Sl</th>
-              <th>Gia</th>
+              <th>ID</th>  
+              <th>Number</th>
+              <th>Price</th>
             </tr>
         </thead>
 <form action="/doupdate" method="post">
         {{#each model}}
         <tr>
             <input type="hidden" name="id" value="{{_id}}">
-            <td><input type="text" value= "{{name}}" name = "txtName" id=""></td>
-            <td><input type="text" value= "{{MSP}}" name = "txtMSP" id="" ></td>
-            <td><input type="text" value= "{{Sl}}" name = "txtSL" id=""></td>
-            <td><input type="text" value= "{{Gia}}" name = "txtGia" id=""></td>
+            <td><input type="text" value= "{{Name}}" name = "txtName" id=""></td>
+            <td><input type="text" value= "{{ID}}" name = "txtID" id="" ></td>
+            <td><input type="text" value= "{{Number}}" name = "txtNumber" id=""></td>
+            <td><input type="text" value= "{{Price}}" name = "txtPrice" id=""></td>
             <td><input type="submit" value="Confirm"></td>
             <td><button><a href="/allProduct">Back</a></button></td>
         </tr>      
