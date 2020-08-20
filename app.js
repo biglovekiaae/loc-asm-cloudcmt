@@ -23,14 +23,15 @@ var url = "mongodb+srv://loc:123@cluster0.zvhhy.mongodb.net/test";
 app.get('/', async(req, res) => {
     let client = await MongoClient.connect(url, { useUnifiedTopology: true });
     let dbo = client.db("LocPoShop");
-    let results = await dbo.collection("products").find({}).toArray();
+    let results = await dbo.collection("products").find({}).sort({ Name: -1 }).toArray();
     res.render('index', { model: results });
 })
 app.get('/allProduct', async(req, res) => {
     let client = await MongoClient.connect(url, { useUnifiedTopology: true });
     let dbo = client.db("LocPoShop");
-    let results = await dbo.collection("products").find({}).toArray();
+    let results = await dbo.collection("products").find({}).sort({ Name: -1 }).toArray();
     res.render('allProduct', { model: results });
+
 })
 server = app.listen(port, (err) => {
     if (err) { console.log(err) } else {
@@ -77,6 +78,7 @@ app.post('/doSearch', async(req, res) => {
     res.render('allProduct', { model: results });
 
 })
+
 app.get('/update', async function(req, res) {
     let id = req.query.id;
     console.log(id)
